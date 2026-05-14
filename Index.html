@@ -1,0 +1,140 @@
+import time
+
+class HamiltonianPath:
+
+    def __init__(self, graph):
+        self.graph = graph
+        self.n = len(graph)
+        self.path = []
+        self.visited_nodes = 0
+
+    # Constraint checker
+    def is_valid(self, v, visited, path):
+
+        # Harus terhubung dengan node sebelumnya
+        if path:
+            last = path[-1]
+
+            if self.graph[last][v] == 0:
+                return False
+
+        # Node belum dikunjungi
+        if visited[v]:
+            return False
+
+        return True
+
+    # Fungsi backtracking
+    def backtrack(self, current_path, visited):
+
+        self.visited_nodes += 1
+
+        print("Path sekarang:", current_path)
+
+        # Jika semua node sudah dikunjungi
+        if len(current_path) == self.n:
+            self.path = current_path[:]
+            return True
+
+        # Pruning dead-end
+        possible = False
+
+        for next_node in range(self.n):
+            if self.is_valid(next_node, visited, current_path):
+                possible = True
+                break
+
+        if not possible and len(current_path) < self.n:
+            return False
+
+        # Coba semua kemungkinan node
+        for v in range(self.n):
+
+            if self.is_valid(v, visited, current_path):
+
+                visited[v] = True
+                current_path.append(v)
+
+                # Rekursi
+                if self.backtrack(current_path, visited):
+                    return True
+
+                # Backtracking
+                visited[v] = False
+                current_path.pop()
+
+        return False
+
+    # Menjalankan algoritma
+    def solve(self, start=0):
+
+        visited = [False] * self.n
+        visited[start] = True
+
+        start_time = time.perf_counter()
+
+        found = self.backtrack([start], visited)
+
+        end_time = time.perf_counter()
+
+        if found:
+            print("\nHamiltonian Path ditemukan:")
+            print(" -> ".join(map(str, self.path)))
+        else:
+            print("\nHamiltonian Path tidak ditemukan")
+
+        print(f"\nTotal node dikunjungi: {self.visited_nodes}")
+        print(f"Waktu eksekusi: {end_time - start_time:.6f} detik")
+
+
+# =========================
+# TEST CASE 1
+# =========================
+
+print("TEST CASE 1")
+
+graph1 = [
+    [0,1,1,0],
+    [1,0,1,1],
+    [1,1,0,1],
+    [0,1,1,0]
+]
+
+hp1 = HamiltonianPath(graph1)
+hp1.solve(0)
+
+
+# =========================
+# TEST CASE 2
+# =========================
+
+print("\n====================")
+print("TEST CASE 2")
+
+graph2 = [
+    [0,1,0,0],
+    [1,0,1,0],
+    [0,1,0,1],
+    [0,0,1,0]
+]
+
+hp2 = HamiltonianPath(graph2)
+hp2.solve(0)
+
+
+# =========================
+# TEST CASE 3
+# =========================
+
+print("\n====================")
+print("TEST CASE 3")
+
+graph3 = [
+    [0,1,0,0],
+    [1,0,0,0],
+    [0,0,0,1],
+    [0,0,1,0]
+]
+
+hp3 = HamiltonianPath(graph3)
+hp3.solve(0)
