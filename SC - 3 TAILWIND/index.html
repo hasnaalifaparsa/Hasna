@@ -1,0 +1,55 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title> 
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<nav class="bg-gray-800 text-white p-6 mb-10 flex justify-between itens-center">
+    <a href="#" class="font-bold text-xl">
+            My Website
+    </a>
+    <ul class="flex gap-6">
+        <li><a href="index.html" class="hover:text-blue-300">Home</a></li>
+        <li><a href="grid.html" class="hover:text-blue-300">Grid</a></li>
+        <li><a href="flex.html" class="hover:text-blue-300">Flex</a></li>
+        <li><a href="default.html" class="hover:text-blue-300">Default</a></li>
+    </ul>
+</nav>
+
+<body>
+    <h1 class="text-4xl font-bold text-center text-black pb-4 mb-10"> 
+        Belajar Tailwind CSS
+    </h1> 
+
+    <section class="bg-gray-700 p-10 text-center">
+        <h2 class="text-white">Padding 40px di semua sisi</h2>
+    </section>
+
+    <section class="mt-8">
+        <div class="bg-gray-500 mx-10 p-6 rounded-lg">
+            <p class="text-white">Margin kiri kanan 40px, padding dalam 24px</p>
+        </div>
+        
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-10">
+        <div class="bg-gray-400 p-6 rounded-lg shadow">
+            <p class="text-white">Card 1</p>
+        </div>
+        <div class="bg-gray-400 p-6 rounded-lg shadow">
+            <p class="text-white">Card 2</p>
+        </div>
+        <div class="bg-gray-400 p-6 rounded-lg shadow">
+            <p class="text-white">Card 3</p>
+        </div>
+        <div class="bg-gray-400 p-6 rounded-lg shadow">
+            <p class="text-white">Card 4</p>
+        </div>
+    </section>
+ 
+</body>
+</html>
